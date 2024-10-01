@@ -1,0 +1,19 @@
+header{
+    height:100px;
+    background-color: slategray;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+main{
+    height: calc( 100vh - 100px );
+    background-color: darkslategrey;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.weather-state{
+    display: flex;
+    gap:1rem;
+}
