@@ -1,48 +1,73 @@
 
-        const searchBtn = document.querySelector("#search");
-        const searchInput = document.querySelector("input");
-        const temp = document.querySelector(".temperature");
-        const Location = document.querySelector(".location");
-        const Time = document.querySelector(".time-date");
-        const Day = document.querySelector(".day");
-        const Image = document.querySelector("#image");
-        const Condition = document.querySelector(".condition");
+// select
+const searchBtn = document.querySelector("#search");
+const searchInput = document.querySelector("input");
 
-        const searchHandler = async ()=>{
-            const location = searchInput.value;
-            if(location!=""){
-                const data = await fetchData(location);
-                temp.textContent = `${data.current.temp_c}`;
-                Location.textContent = `${data.location.name}`;
-                const localtime = data.location.localtime;
-                Time.textContent = localtime;
-                const dayOfWeek = getDayOfWeek(data.location.localtime);
-                Day.textContent = dayOfWeek;  
-                const ImgURl = `https:${data.current.condition.icon}`;
-                Image.src=ImgURl;
-                Condition.textContent = `${data.current.condition.text}`;
-                console.log(data);
-                searchInput.value="";
-            }else{
-                alert("Please input any location first!");
-            }
+// event listener
+searchBtn.addEventListener("click", async function () {
+    // select value 
+    const location = searchInput.value;
+    // check for empty
+    if (location != "") {
+        // data get
+        const data = await fetchWeather(location)
+        //update data inside my dom
+        if (data != null) {
+            updateDOM(data);
         }
+        searchInput.value = "";
+    }
+})
 
-        async function fetchData(location){
-            const url = `http://api.weatherapi.com/v1/current.json?key=e71ecd5b7c944ce8a89113024240110&q=${location}&aqi=no`;
-            const response = await fetch(url);
-            if(response.status==200){
-                const data = await response.json();
-                return data;
-            }else if(response.status==404){
-                alert("Data not found!");
-            }
-        }
+const tempratureElem = document.querySelector(".temprature");
+const locationElem = document.querySelector(".location");
+const emojiImg = document.querySelector(".emoji");
+const timeElem = document.querySelector(".time");
+const dayElem = document.querySelector(".Day");
+const dateElem = document.querySelector(".Date");
+const conditionElem = document.querySelector(".condition");
 
-        function getDayOfWeek(localtime) {
-            const date = new Date(localtime); // Create a Date object
-            const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-            return days[date.getDay()]; // Get the day index and return the corresponding day
-        }
-        
-        searchBtn.addEventListener("click",searchHandler);
+function updateDOM(data) {
+    /***********************filter required data*********************/
+    console.log("i will update the dom", data);
+    const temp = data.current.temp_c;
+    const location = data.location.name;
+    const timeData = data.location.localtime;
+    const [date, time] = timeData.split(" ");
+    const iconLink = data.current.condition.icon;
+    const condition = data.current.condition.text;
+    /*********************update the dom*************************/
+    tempratureElem.textContent = temp + "°C";
+    locationElem.textContent = location;
+    emojiImg.src = iconLink;
+    dateElem.innerText = date;
+    timeElem.innerText = time;
+    conditionElem.innerText = condition;
+}
+
+async function fetchWeather(location) {
+
+    const url = `http://api.weatherapi.com/v1/current.json?key=6fc74cf82bc44773a8a171855241407&q=${location}&aqi=no`
+    // fetch -> inbuilt function to get http response from a server
+    const response = await fetch(url);
+    if (response.status == 400) {
+        alert("location is invalid");
+        return null;
+    } else if (response.status == 200) {
+        const json = await response.json();
+        return json;
+    }
+}
+
+
+
+//  search button -> click -> input get value -> fetchWeather -> update the UI
+
+/***
+ * HTTP packet -> Header-> metdata, status , body -> data 
+ * 200 -> success
+ * 404 -> page not found
+ * 400 -> Bad request
+ * 100->
+ * 
+ * **/ 
