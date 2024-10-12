@@ -1,110 +1,69 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap');
-
-html{
-    font-family: "Roboto" , sans-serif;
-    background-color: rgb(238,238,238);
+html {
+    font-family: sans-serif;
 }
 
-header{
-    height: 5rem;
-}
+/* ***************header******************/
 
-.title-bar{
-    height: 2.5rem;
+header {
+    height: 150px;
+    background-color: #2c3e50;
     display: flex;
+    justify-content: center;
     align-items: center;
-    gap: 0.2rem;
-}
-.title-img{
-    height: 60%;
-    margin-left: 1rem;
-}
-.title-text{
-    font-size: 1rem;
-}
-.menu{
-    position: relative;
-}
-.menu-bar{
-    display: flex;
-    gap: 1rem;
-    align-items: center;
-    height: 50%;
-    margin-left: 1rem;
-    
 }
 
-.menu-btn:hover{
-    background-color: lightblue;
+.input-container {
+    width: 60%;
+    display: flex;
+    justify-content: space-between;
 }
-.menu:hover .menu-items{
-    display: block;
+
+.search-input {
+    font-size: 1.1rem;
+    outline: none;
+    color: white;
+    background-color: transparent;
+    padding: 1rem 0;
+    border: none;
+    border-bottom: 2px solid white;
+    width: 84%;
 }
-.menu-items:hover li:hover{
-    background-color: darkgray;
+
+button {
+    background-color: #44ad96;
+    font-size: 1.1rem;
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 1rem 2rem;
 }
-.menu-items{
-    display: none;
-    background-color: rgb(238,238,238);
-    position: absolute;
-    top:4px;
-    width: 9rem;
-    z-index: 10;
-}
-li{
-    padding: 0.25rem;
-}
-.videoInput{
-    display: none;
-}
-main{
-    background-color: black;
-    height: calc(100vh - 10rem);
+
+
+
+/* code for main  */
+
+main {
+    height: calc(100vh - 150px);
     display: flex;
     align-items: center;
     justify-content: center;
-    position: relative;
-}
-.toast{
-    position: fixed;
-    font-size: 2rem;
     color: white;
-    top: 100px;
-    right: 200px;
-    display: none;
+    background-color: #01161E;
+    ;
 }
-footer{
-    height:5rem;
-    position: relative;
-}
-.btn{
-    background-color: whitesmoke;
-    border: none;
-}
-.btn:hover{
-    background-color: lightgray;
-    border-radius: 5px;
-    border: 1px solid lightgrey;
-}
-footer .left-icons {
+
+.weather-container {
+    display: flex;
     gap: 1rem;
-    display: flex;
-    left: 30px;
-    margin-top: 40px;
-    position: fixed;
+    align-items: center;
+    height: 5rem;
 }
-footer .right-icons{
-    display: flex;
-    margin-top: 40px;
-    position:fixed;
-    right:10px
+
+.location {
+    font-size: 2rem;
+    margin-bottom: 1.6rem;
 }
-footer .slider{
-    position: fixed;
-    margin-top:10px;
-    right: 50px;
-    left: 50px;
-}
-.slider{
-    background-color: lightblue;
+
+.condition {
+    text-align: center;
 }
